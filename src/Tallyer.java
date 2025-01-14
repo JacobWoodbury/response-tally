@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,8 +53,17 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopics(List<String> topics) {
         // WAVE 1
         // TODO: Implement this method
+        Map<String, Integer> binder = new HashMap<>();
+    
+        for(String i: topics){
+            if(binder.containsKey(i)){
+                binder.put(i, binder.get(i)+1);
+                continue;
+            }
+            binder.put(i, 1);
+        }
 
-        return null;
+        return binder;
     }
 
     /**
@@ -71,7 +81,33 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+      Map<String, Integer> binder = new HashMap<>();
+      Map<String, Integer> voteCount = new HashMap<>();
+    int num = topics.size();
+      String student;
+      ArrayList<String> banned = new ArrayList<>();
+      for(int i = 0; i < ids.size(); i++){
+        student = ids.get(i);
+        if(voteCount.containsKey(student)){
+            voteCount.put(student, voteCount.get(student)+1);
+        }else{voteCount.put(student, 1);}
+        
+        if(voteCount.get(student) > 2){
+            banned.add(student);
+        }
+    }
+        for (int i=0; i<topics.size(); i++) {
+            student = ids.get(i);
+            String topic = topics.get(i);
+            if(!(banned.contains(student))){
+                if(binder.containsKey(topics.get(i))){
+                    binder.put(topic, binder.get(topic)+1);
+                }else{
+                    binder.put(topic, 1);
+                }
+            }
+        }
 
-      return null;
+      return binder;
   }
 }
