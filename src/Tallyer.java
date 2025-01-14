@@ -54,7 +54,6 @@ public class Tallyer {
         // WAVE 1
         // TODO: Implement this method
         Map<String, Integer> binder = new HashMap<>();
-    
         for(String i: topics){
             if(binder.containsKey(i)){
                 binder.put(i, binder.get(i)+1);
@@ -62,7 +61,6 @@ public class Tallyer {
             }
             binder.put(i, 1);
         }
-
         return binder;
     }
 
@@ -81,10 +79,12 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+
       Map<String, Integer> binder = new HashMap<>();
       Map<String, Integer> voteCount = new HashMap<>();
-    int num = topics.size();
+      int num = topics.size();
       String student;
+      String topic;
       ArrayList<String> banned = new ArrayList<>();
       for(int i = 0; i < ids.size(); i++){
         student = ids.get(i);
@@ -96,18 +96,17 @@ public class Tallyer {
             banned.add(student);
         }
     }
-        for (int i=0; i<topics.size(); i++) {
+        for (int i=0; i<num; i++) {
             student = ids.get(i);
-            String topic = topics.get(i);
+            topic = topics.get(i);
             if(!(banned.contains(student))){
-                if(binder.containsKey(topics.get(i))){
+                if(binder.containsKey(topic)){
                     binder.put(topic, binder.get(topic)+1);
                 }else{
                     binder.put(topic, 1);
                 }
             }
         }
-
       return binder;
   }
 }
